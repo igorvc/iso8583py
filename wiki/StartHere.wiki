@@ -1,0 +1,39 @@
+#Page that has the main information
+
+= Introduction =
+
+If you came to here, maybe you know something about ISO8583.
+
+If not, you can start learning about this ISO especification in [http://en.wikipedia.org/wiki/ISO_8583 Wikipedia ].
+
+This project want to develop a ISO8583 library to be used with Python.
+
+And we have it!
+
+And the best feature, it is 100% python!
+
+So, download, install and use to develop your application.
+
+But, remember that this library is released under [http://gplv3.fsf.org/ GPL V3] 
+
+
+= Thanks =
+
+We like to thanks to:
+  * [http://www.vulcanno.com.br Vulcanno IT Solutions]
+  * [http://www.palittus.com.br Palittus Design]
+  * Python developers :)
+
+
+= More information about =
+
+This project has a lot of information to help developers, users and all people that need to use it:
+
+  * InstallPage
+  * DownloadPage
+  * SponsorshipPage
+  * ExamplesPage
+  * PyDocPage
+
+[http://www.gnu.org/graphics/gplv3-127x51.png]
+[http://www.python.org/community/logos/python-powered-w-100x40.png]
