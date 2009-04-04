@@ -1,0 +1,17 @@
+To install ISO8583 Python library is a piece of cake :)
+
+1) Download the package
+
+2) Un-compress it
+
+3) Go to the folder where setup.py is
+
+4) Build the package with the command: "python setup.py sdist"
+
+5) Install with the command: "python setup.py install"
+
+6) That's it!
+
+7) Enjoy, read, learn the examples in the "ExamplesPage" directory.
+
+ 
