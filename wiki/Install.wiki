@@ -12,6 +12,6 @@ To install ISO8583 Python library is a piece of cake :)
 
 6) That's it!
 
-7) Enjoy, read, learn the examples in the "Examples" directory.
+7) Enjoy, read, learn the examples in the "ExamplesPage" directory.
 
  
