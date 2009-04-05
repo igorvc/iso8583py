@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	Enjoy it!
 	Thanks to: Vulcanno IT Solutions <http://www.vulcanno.com.br>
 	Licence: GPL Version 3
-	More information: http://code.google.com/p/iso8385/
+	More information: http://code.google.com/p/iso8583py/
 
 	Example:
 		from ISO8583.ISO8583 import ISO8583
