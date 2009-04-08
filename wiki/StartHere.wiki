@@ -33,7 +33,7 @@ This project has a lot of information to help developers, users and all people t
   * DownloadPage
   * SponsorshipPage
   * ExamplesPage
-  * PyDocPage
+  * [http://www.vulcanno.com.br/python/ISO8583.html PyDocPage]
 
 [http://www.gnu.org/graphics/gplv3-127x51.png]
 [http://www.python.org/community/logos/python-powered-w-100x40.png]
