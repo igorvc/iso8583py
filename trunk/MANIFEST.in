@@ -1,4 +1,5 @@
 include INSTALL
+include LICENCE
 include doc/*
 include examples/*
 prune .bzr
