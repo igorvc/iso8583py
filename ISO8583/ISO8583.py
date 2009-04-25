@@ -411,8 +411,9 @@ class ISO8583:
 		"""Method that print the bitmap in ASCII form
 		Hint: Try to use getBitmap method and format your own print :) 
 		"""
-		if self.BITMAP_HEX == '':
-			self.__buildBitmap()
+		
+		self.__buildBitmap()
+		
 		# printing		
 		print self.BITMAP_HEX
 	################################################################################################	
@@ -423,6 +424,9 @@ class ISO8583:
 		"""Method that build the bitmap ASCII
 		It's a internal method, so don't call!
 		"""
+		
+		self.BITMAP_HEX = ''
+		
 		for c in range(0,16):
 			if (self.BITMAP[0] & self._BIT_POSITION_1) != self._BIT_POSITION_1:
 				# Only has the first bitmap
@@ -701,8 +705,7 @@ class ISO8583:
 		@raise: InvalidMTI Exception
 		"""
 		
-		if self.BITMAP_HEX == '':
-			self.__buildBitmap()
+		self.__buildBitmap()
 			
 		if self.MESSAGE_TYPE_INDICATION == '':
 			raise InvalidMTI('Check MTI! Do you set it?')
