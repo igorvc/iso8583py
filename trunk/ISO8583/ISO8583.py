@@ -384,8 +384,9 @@ class ISO8583:
 		if self.getBitType(bit) == 'LLL':
 			self.__setBitTypeLLL(bit, value)
 								
-		if self.getBitType(bit) == 'N' or self.getBitType(bit) == 'A' or self.getBitType(bit) == 'ANS':
+		if self.getBitType(bit) == 'N' or self.getBitType(bit) == 'A' or self.getBitType(bit) == 'ANS' or self.getBitType(bit) == 'B':
 			self.__setBitTypeN(bit, value)
+
 			
 		
 		#Continuation bit?
@@ -617,9 +618,9 @@ class ISO8583:
 	################################################################################################
 		
 	################################################################################################
-	# Set of type N, A, AN
+	# Set of type N, A, AN,B
 	def __setBitTypeN(self, bit, value):
-		"""Method that set a bit with value in form A/N
+		"""Method that set a bit with value in form A/N/B
 		It complete the size of the bit with a default value
 		Example: pack.setBit(3,'30000') -> Bit 3 is a N type, so this bit, in ASCII form need to has size = 6 (ISO especification) so the value 30000 size = 5 need to receive more "1" number.
 			In this case, will be "0" in the left. In the package, the bit will be sent like '030000'
@@ -634,7 +635,7 @@ class ISO8583:
 		if len(value) > self.getBitLimit(bit):
 			value = value[0:self.getBitLimit(bit)]
 			raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
-							
+				
 		self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
 		
 	################################################################################################
