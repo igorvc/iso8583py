@@ -54,7 +54,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 __author__ =  'Igor Vitorio Custodio <igorvc@vulcanno.com.br>'
-__version__=  '0.1'
+__version__=  '0.2'
 __licence__ = 'GPL V3'
 
 
@@ -384,8 +384,17 @@ class ISO8583:
 		if self.getBitType(bit) == 'LLL':
 			self.__setBitTypeLLL(bit, value)
 								
-		if self.getBitType(bit) == 'N' or self.getBitType(bit) == 'A' or self.getBitType(bit) == 'ANS' or self.getBitType(bit) == 'B':
+		if self.getBitType(bit) == 'N' :
 			self.__setBitTypeN(bit, value)
+			
+		if self.getBitType(bit) == 'A':
+			self.__setBitTypeA(bit, value)	
+		
+		if self.getBitType(bit) == 'ANS' or self.getBitType(bit) == 'B':
+			self.__setBitTypeANS(bit, value)		
+		
+		if  self.getBitType(bit) == 'B':
+			self.__setBitTypeB(bit, value)	
 
 			
 		
@@ -618,11 +627,80 @@ class ISO8583:
 	################################################################################################
 		
 	################################################################################################
-	# Set of type N, A, AN,B
+	# Set of type N, 
 	def __setBitTypeN(self, bit, value):
-		"""Method that set a bit with value in form A/N/B
+		"""Method that set a bit with value in form N
 		It complete the size of the bit with a default value
 		Example: pack.setBit(3,'30000') -> Bit 3 is a N type, so this bit, in ASCII form need to has size = 6 (ISO especification) so the value 30000 size = 5 need to receive more "1" number.
+			In this case, will be "0" in the left. In the package, the bit will be sent like '030000'
+		@param: bit -> bit to be setted
+		@param: value -> value to be setted
+		@raise: ValueToLarge Exception
+		It's a internal method, so don't call!
+		"""
+		
+		value = "%s" % value
+	
+		if len(value) > self.getBitLimit(bit):
+			value = value[0:self.getBitLimit(bit)]
+			raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
+				
+		self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
+		
+	################################################################################################
+	
+	################################################################################################
+	# Set of type A
+	def __setBitTypeA(self, bit, value):
+		"""Method that set a bit with value in form A
+		It complete the size of the bit with a default value
+		Example: pack.setBit(3,'30000') -> Bit 3 is a A type, so this bit, in ASCII form need to has size = 6 (ISO especification) so the value 30000 size = 5 need to receive more "1" number.
+			In this case, will be "0" in the left. In the package, the bit will be sent like '030000'
+		@param: bit -> bit to be setted
+		@param: value -> value to be setted
+		@raise: ValueToLarge Exception
+		It's a internal method, so don't call!
+		"""
+		
+		value = "%s" % value
+	
+		if len(value) > self.getBitLimit(bit):
+			value = value[0:self.getBitLimit(bit)]
+			raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
+				
+		self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
+		
+	################################################################################################
+	
+	################################################################################################
+	# Set of type B
+	def __setBitTypeB(self, bit, value):
+		"""Method that set a bit with value in form B
+		It complete the size of the bit with a default value
+		Example: pack.setBit(3,'30000') -> Bit 3 is a B type, so this bit, in ASCII form need to has size = 6 (ISO especification) so the value 30000 size = 5 need to receive more "1" number.
+			In this case, will be "0" in the left. In the package, the bit will be sent like '030000'
+		@param: bit -> bit to be setted
+		@param: value -> value to be setted
+		@raise: ValueToLarge Exception
+		It's a internal method, so don't call!
+		"""
+		
+		value = "%s" % value
+	
+		if len(value) > self.getBitLimit(bit):
+			value = value[0:self.getBitLimit(bit)]
+			raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
+				
+		self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
+		
+	################################################################################################
+	
+	################################################################################################
+	# Set of type ANS
+	def __setBitTypeANS(self, bit, value):
+		"""Method that set a bit with value in form ANS
+		It complete the size of the bit with a default value
+		Example: pack.setBit(3,'30000') -> Bit 3 is a ANS type, so this bit, in ASCII form need to has size = 6 (ISO especification) so the value 30000 size = 5 need to receive more "1" number.
 			In this case, will be "0" in the left. In the package, the bit will be sent like '030000'
 		@param: bit -> bit to be setted
 		@param: value -> value to be setted
