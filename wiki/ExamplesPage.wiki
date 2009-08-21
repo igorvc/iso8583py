@@ -14,6 +14,7 @@ This is one of the most important examples, because:
   * Build a package
   * Send it by socket
   * Receive it by Socket
+  * Redefine a bit specification
   * It's complete!
 
 == Echo ==
