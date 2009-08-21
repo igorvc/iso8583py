@@ -1,4 +1,4 @@
-#Examples page
+#Examples Here you can see some examples of use
 
 = Introduction =
 
