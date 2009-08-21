@@ -1,4 +1,4 @@
-#Page that has the main information
+#summary Page that has the main information
 
 = Introduction =
 
