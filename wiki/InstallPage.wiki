@@ -2,7 +2,7 @@
 
 To install ISO8583 Python library is a piece of cake :)
 
-1) Download the package
+1) [http://code.google.com/p/iso8583py/downloads/list Download the package]
 
 2) Un-compress it
 
@@ -14,4 +14,6 @@ To install ISO8583 Python library is a piece of cake :)
 
 6) Enjoy, read, learn the examples in the "ExamplesPage" directory.
 
+You can install using [http://peak.telecommunity.com/DevCenter/EasyInstall easy-install] on the [http://pypi.python.org/pypi/ISO8583%20Module/1.0 Python Package Index].
  
+Or you can found the source at http://code.google.com/p/iso8583py/source/checkout
