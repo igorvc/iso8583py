@@ -29,7 +29,7 @@ If the server is OK, it sends back a package with MTI 0810. So the client can ke
 
 == Echo Server ==
 
-Is a very simple Socket single-thread server that receive a ISO8583 package, process it, and answer if is everythong ok.
+Is a very simple Socket single-thread server that receive a ISO8583 package, process it, and answer if is everything ok.
 
 This is the code:
 
