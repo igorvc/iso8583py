@@ -1,3 +1,5 @@
+#summary Information about instalation
+
 To install ISO8583 Python library is a piece of cake :)
 
 1) Download the package
