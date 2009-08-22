@@ -16,8 +16,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-"""
-	ISO8583 Class.
+
+__author__ =  'Igor Vitorio Custodio <igorvc@vulcanno.com.br>'
+__version__=  '0.2'
+__licence__ = 'GPL V3'
+
+
+
+from ISOErrors import *
+import struct
+
+
+class ISO8583:
+	"""Main Class to work with ISO8583 packages.
 	Used to create, change, send, receive, parse or work with ISO8593 Package version 1993.
 	It's 100% Python :)
 	Enjoy it!
@@ -52,20 +63,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		print 'This is the ISO8583 complete package to sent over the TCPIP network %s' % iso.getNetworkISO()
 	
 """
-
-__author__ =  'Igor Vitorio Custodio <igorvc@vulcanno.com.br>'
-__version__=  '0.2'
-__licence__ = 'GPL V3'
-
-
-
-from ISOErrors import *
-import struct
-
-
-class ISO8583:
-	"""Main Class to work with ISO8583 packages.
-	"""
 	#Attributes
 	# Bitsto be set 00000000 -> _BIT_POSITION_1 ... _BIT_POSITION_8
 	_BIT_POSITION_1 = 128 # 10 00 00 00
