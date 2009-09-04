@@ -127,7 +127,7 @@ class ISO8583:
 	_BITS_VALUE_TYPE[37] = ['37','Retrieval reference number','N',12,'an']
 	_BITS_VALUE_TYPE[38] = ['38','Approval code','N',6,'an']
 	_BITS_VALUE_TYPE[39] = ['39','Action code','A',2,'an']
-	_BITS_VALUE_TYPE[40] = ['40','Service code','N3',3,'an']
+	_BITS_VALUE_TYPE[40] = ['40','Service code','N',3,'an']
 	_BITS_VALUE_TYPE[41] = ['41','Card acceptor terminal identification','N',8,'ans']
 	_BITS_VALUE_TYPE[42] = ['42','Card acceptor identification code','A',15,'ans']
 	_BITS_VALUE_TYPE[43] = ['43','Card acceptor name/location','A',40,'asn']
