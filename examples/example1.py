@@ -93,7 +93,7 @@ except BitNotSet, bns:
 
 #More exceptions...	
 print '\n\n\n------------------------------------------\n'
-print 'Exeptions....'
+print 'Exceptions....'
 
 iso = ISO8583()
 try:
