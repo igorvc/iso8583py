@@ -828,7 +828,7 @@ class ISO8583:
 		#need to validate if the type and size is compatible! example slimit = 100 and type = LL
 			
 		if 	bitType == "B" or bitType == "N" or bitType == "AN" or bitType == "ANS" or bitType == "LL" or bitType == "LLL":
-			if 	valueType == "a" or valueType == "n" or valueType == "ansb" or valueType == "ans" or valueType == "b" :
+			if 	valueType == "a" or valueType == "n" or valueType == "ansb" or valueType == "ans" or valueType == "b" or valueType == "an" :
 				self._BITS_VALUE_TYPE[bit] = [smallStr, largeStr, bitType, size, valueType]
 				if self.DEBUG == True:
 					print 'Bit %d redefined!' % bit
