@@ -17,3 +17,5 @@ To install ISO8583 Python library is a piece of cake :)
 You can install using [http://peak.telecommunity.com/DevCenter/EasyInstall easy-install] on the [http://pypi.python.org/pypi/ISO8583%20Module/1.0 Python Package Index].
  
 Or you can found the source at http://code.google.com/p/iso8583py/source/checkout
+
+*It's interesting that you download the source and install it. Because We do a lot of bugfixes.*
