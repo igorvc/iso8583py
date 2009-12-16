@@ -188,7 +188,7 @@ class ISO8583:
 	_BITS_VALUE_TYPE[98] = ['98','Payee','ANS',25,'ans']
 	_BITS_VALUE_TYPE[99] = ['99','Settlement institution identification code','LL',11,'n']
 	_BITS_VALUE_TYPE[100] = ['100','Receiving institution identification code','LL',11,'n']
-	_BITS_VALUE_TYPE[101] = ['101','File name','ASN',17,'ans']
+	_BITS_VALUE_TYPE[101] = ['101','File name','ANS',17,'ans']
 	_BITS_VALUE_TYPE[102] = ['102','Account identification 1','LL',28,'ans']
 	_BITS_VALUE_TYPE[103] = ['103','Account identification 2','LL',28,'ans']
 	_BITS_VALUE_TYPE[104] = ['104','Transaction description','LLL',100,'ans']
