@@ -948,7 +948,7 @@ class ISO8583:
 					# self.BITMAP_VALUES[cont] = '(' + strWithoutMtiBitmap[offset:offset+4] + ')' + strWithoutMtiBitmap[offset+4:offset+4+valueSize]
 					# offset += valueSize + 4	
 						
-				if self.getBitType(cont) == 'N' or self.getBitType(cont) == 'A' or self.getBitType(cont) == 'ANS':
+				if self.getBitType(cont) == 'N' or self.getBitType(cont) == 'A' or self.getBitType(cont) == 'ANS' or self.getBitType(cont) == 'B' or self.getBitType(cont) == 'AN' :
 					self.BITMAP_VALUES[cont] = strWithoutMtiBitmap[offset:self.getBitLimit(cont)+offset]
 					
 					if self.DEBUG == True:
