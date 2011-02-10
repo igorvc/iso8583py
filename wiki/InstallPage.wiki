@@ -32,4 +32,4 @@ Or you can found the source at http://code.google.com/p/iso8583py/source/checkou
 
 You can install this library using *apt-get install python-iso8583*
 
-Ou using Synaptic -> Search iso8583 -> Click in "python-iso8583" and select install.
+Or using Synaptic -> Search iso8583 -> Click in "python-iso8583" and select install.
