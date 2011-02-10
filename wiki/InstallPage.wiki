@@ -1,5 +1,12 @@
 #summary Information about instalation
 
+= How to Install =
+
+Here you find some ho to install this library.
+
+
+== From source ==
+
 To install ISO8583 Python library is a piece of cake :)
 
 1) [http://code.google.com/p/iso8583py/downloads/list Download the package]
@@ -19,3 +26,10 @@ You can install using [http://peak.telecommunity.com/DevCenter/EasyInstall easy-
 Or you can found the source at http://code.google.com/p/iso8583py/source/checkout
 
 *It's interesting that you download the source and install it. Because We do a lot of bugfixes.*
+
+
+== Debian/Ubuntu ==
+
+You can install this library using *apt-get install python-iso8583*
+
+Ou using Synaptic -> Search iso8583 -> Click in "python-iso8583" and select install.
