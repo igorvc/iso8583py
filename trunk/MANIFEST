@@ -1,6 +1,7 @@
 INSTALL
 LICENCE
 README
+TODO
 setup.py
 ISO8583\ISO8583.py
 ISO8583\ISOErrors.py
@@ -8,6 +9,7 @@ ISO8583\__init__.py
 doc\ISO8583.ISO8583.html
 doc\ISO8583.ISOErrors.html
 doc\ISO8583.html
+doc\index.html
 examples\echoClient.py
 examples\echoServer.py
 examples\example1.py

@@ -45,31 +45,31 @@ os.system(['clear','cls'][os.name == 'nt'])
 i2 = ISO8583()
 
 iso2 = '0210B238000102C080040000000000000002100000000000001700010814465469421614465701081100301000000N399915444303500019991544986020 Value not allowed!!009000095492'
-print '\n\n\n------------------------------------------\n'
-print 'This is the ISO <%s> parse it!' % iso2
+print ('\n\n\n------------------------------------------\n')
+print ('This is the ISO <%s> parse it!' % iso2)
 
 i2.setIsoContent(iso2)
-print 'Bitmap = %s' %i2.getBitmap() 
-print 'MTI = %s' %i2.getMTI() 
+print ('Bitmap = %s' %i2.getBitmap()) 
+print ('MTI = %s' %i2.getMTI())
 
-print 'Bits'
+print ('Bits')
 v3 = i2.getBitsAndValues()
 for v in v3:
-	print '(1) Bit %s of type %s and value = %s' % (v['bit'],v['type'],v['value'])
+	print ('(1) Bit %s of type %s and value = %s' % (v['bit'],v['type'],v['value']))
 	
 
 # in this case, we need to redefine a bit because default bit 42 is A and in this especification is "N"
 # the rest remain, so we use get's to copy original values :)
 i2.redefineBit(42, '42', i2.getLargeBitName(42), 'N', i2.getBitLimit(42), i2.getBitValueType(42) )	
-print '\nBit 42 redefined...\n'
+print ('\nBit 42 redefined...\n')
 	
 i3 = ISO8583(iso=iso2)
-print 'Bitmap = %s' %i3.getBitmap() 
-print 'MTI = %s' %i3.getMTI() 
+print ('Bitmap = %s' %i3.getBitmap()) 
+print ('MTI = %s' %i3.getMTI())
 
-print 'Bits inside'
+print ('Bits inside')
 v4 = i3.getBitsAndValues()
 for v in v4:
-	print '(2) Bit %s of type %s and value = %s' % (v['bit'],v['type'],v['value'])	
+	print ('(2) Bit %s of type %s and value = %s' % (v['bit'],v['type'],v['value']))	
 
 	

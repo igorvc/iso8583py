@@ -29,13 +29,13 @@ os.system(['clear','cls'][os.name == 'nt'])
 p = ISO8583()
 #some string describing the transation type
 transation = "200"
-print 'Setting transation type to %s' % transation
+print ('Setting transation type to %s' % transation)
 p.setTransationType(transation)
 # Is the same that:
 #p.setMTI(transation)
 
 #Some tests and 
-print 'Setting bits'
+print ('Setting bits')
 
 p.setBit(3,"100000")
 p.setBit(4,1200)
@@ -53,47 +53,47 @@ p.setBit(63,"00000105")
 try:
 	p.setBit(126,"00000000000000105")
 except ValueToLarge:
-	print '\t\tSomething happening!!!! The Exception! So, bit 126 is not set!!!!'
+	print ('\t\tSomething happening!!!! The Exception! So, bit 126 is not set!!!!')
 	#if want more information ...
 	#traceback.print_exc()
 
 #show hex bitmap
-print 'Bitmap in HEX'
+print ('Bitmap in HEX')
 p.showBitmap()
 
 #Show bits
-print 'Bits with values'
+print ('Bits with values')
 p.showIsoBits()
 
 # Show raw ASCII ISO
-print 'The package is -> '
+print ('The package is -> ')
 p.showRawIso()
 
 # Getting bits...
-print '\n\n\n------------------------------------------\n'
+print ('\n\n\n------------------------------------------\n')
 
-print 'Getting bits'
+print ('Getting bits')
 try:
-	print 'Bit 7 is there? %s' % p.getBit(7)
-	print 'Bit 32 is there? %s' % p.getBit(32)
+	print ('Bit 7 is there? %s' % p.getBit(7))
+	print ('Bit 32 is there? %s' % p.getBit(32))
 except:
-	print 'Something is bad...'
+	print ('Something is bad...')
 	
 # Testing exceptions...	
 try:
-	print 'Bit 45 is there? %s' % p.getBit(45)
+	print ('Bit 45 is there? %s' % p.getBit(45))
 except:
-	print "No, this bit is not there :)"	
+	print ("No, this bit is not there :)")	
 
 try:
-	print 'Bit 27 is there? %s' % p.getBit(27)
+	print ('Bit 27 is there? %s' % p.getBit(27))
 except BitNotSet, bns:
 	print bns	
 	
 
 #More exceptions...	
-print '\n\n\n------------------------------------------\n'
-print 'Exceptions....'
+print ('\n\n\n------------------------------------------\n')
+print ('Exceptions....')
 
 iso = ISO8583()
 try:
@@ -106,9 +106,9 @@ try:
 	iso.setBit(49,9861) # this bit is wrong ...
 	iso.setBit(99,99)
 except ValueToLarge, e:
-		print 'Value too large :( %s' % e
+		print ('Value too large :( %s' % e)
 except InvalidMTI, i:
-		print 'This MTI is wrong :( %s' % i
+		print ('This MTI is wrong :( %s' % i)
 
 
 

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 __author__ =  'Igor Vitorio Custodio <igorvc@vulcanno.com.br>'
-__version__=  '0.2'
+__version__=  '1.2'
 __licence__ = 'GPL V3'
 
 
@@ -51,16 +51,16 @@ class ISO8583:
 			iso.setBit(49,986)
 			iso.setBit(99,99)
 		except ValueToLarge, e:
-				print 'Value too large :( %s' % e
+				print ('Value too large :( %s' % e)
 		except InvalidMTI, i:
-				print 'This MTI is wrong :( %s' % i
+				print ('This MTI is wrong :( %s' % i)
 				
-		print 'The Message Type Indication is = %s' %iso.getMTI() 
+		print ('The Message Type Indication is = %s' %iso.getMTI()) 
 		
-		print 'The Bitmap is = %s' %iso.getBitmap() 
+		print ('The Bitmap is = %s' %iso.getBitmap()) 
 		iso.showIsoBits();
-		print 'This is the ISO8583 complete package %s' % iso.getRawIso()
-		print 'This is the ISO8583 complete package to sent over the TCPIP network %s' % iso.getNetworkISO()
+		print ('This is the ISO8583 complete package %s' % iso.getRawIso())
+		print ('This is the ISO8583 complete package to sent over the TCPIP network %s' % iso.getNetworkISO())
 	
 """
 	#Attributes
@@ -329,7 +329,7 @@ class ISO8583:
 		"""
 		
 		if self.DEBUG == True:
-			print 'Init bitmap'
+			print ('Init bitmap')
 			
 		if len(self.BITMAP) == 16:
 			for cont in range(0,16):
@@ -346,7 +346,7 @@ class ISO8583:
 		It's a internal method, so don't call!
 		"""
 		if self.DEBUG == True:
-			print 'Init bitmap_values'
+			print ('Init bitmap_values')
 			
 		if len(self.BITMAP_VALUES) == 128:
 			for cont in range(0,128):
@@ -367,7 +367,7 @@ class ISO8583:
 		@raise: BitInexistent Exception, ValueToLarge Exception
 		"""
 		if self.DEBUG == True:
-			print 'Setting bit inside bitmap bit[%s] = %s' % (bit, value)
+			print ('Setting bit inside bitmap bit[%s] = %s') % (bit, value)
 			
 		if bit < 1 or bit > 128:
 			raise BitInexistent("Bit number %s dosen't exist!" % bit)
@@ -438,7 +438,7 @@ class ISO8583:
 			if (self.BITMAP[0] & self._BIT_POSITION_1) != self._BIT_POSITION_1:
 				# Only has the first bitmap
 				if self.DEBUG == True:
-					print '%d Bitmap = %d(Decimal) = %s (hexa) ' %(c, self.BITMAP[c], hex(self.BITMAP[c]))	
+					print ('%d Bitmap = %d(Decimal) = %s (hexa) ' %(c, self.BITMAP[c], hex(self.BITMAP[c])))	
 					
 				tm = hex(self.BITMAP[c])[2:]
 				if len(tm) != 2:
@@ -448,7 +448,7 @@ class ISO8583:
 					break
 			else: # second bitmap
 				if self.DEBUG == True:
-					print '%d Bitmap = %d(Decimal) = %s (hexa) ' %(c, self.BITMAP[c], hex(self.BITMAP[c]))	
+					print ('%d Bitmap = %d(Decimal) = %s (hexa) ' %(c, self.BITMAP[c], hex(self.BITMAP[c])))	
 					
 				tm = hex(self.BITMAP[c])[2:]
 				if len(tm) != 2:
@@ -473,7 +473,7 @@ class ISO8583:
 		for x in range(0,32,2):
 			if (int(bitmap[0:2],16) & self._BIT_POSITION_1) != self._BIT_POSITION_1: # Only 1 bitmap
 				if self.DEBUG == True:
-					print 'Token[%d] %s converted to int is = %s' %(x, bitmap[x:x+2], int(bitmap[x:x+2],16))
+					print ('Token[%d] %s converted to int is = %s' %(x, bitmap[x:x+2], int(bitmap[x:x+2],16)))
 					
 				self.BITMAP_HEX += bitmap[x:x+2]
 				self.BITMAP[cont] = int(bitmap[x:x+2],16)
@@ -481,7 +481,7 @@ class ISO8583:
 					break
 			else: # Second bitmap
 				if self.DEBUG == True:
-					print 'Token[%d] %s converted to int is = %s' %(x, bitmap[x:x+2], int(bitmap[x:x+2],16))
+					print ('Token[%d] %s converted to int is = %s' %(x, bitmap[x:x+2], int(bitmap[x:x+2],16)))
 					
 				self.BITMAP_HEX += bitmap[x:x+2]
 				self.BITMAP[cont] = int(bitmap[x:x+2],16) 
@@ -496,7 +496,7 @@ class ISO8583:
 		@param: bitmap -> bitmap str to be analized and translated to "bits"
 		"""
 		bits = self.__inicializeBitsFromBitmapStr(bitmap)
-		print 'Bits inside %s  = %s' % (bitmap,bits)	
+		print ('Bits inside %s  = %s' % (bitmap,bits))	
 	################################################################################################	
 	
 	################################################################################################
@@ -510,23 +510,23 @@ class ISO8583:
 		for c in range(0,16):
 			for d in range(1,9):
 				if self.DEBUG == True:
-					print 'Value (%d)-> %s & %s = %s' % (d,self.BITMAP[c] , self._TMP[d], (self.BITMAP[c] & self._TMP[d]) )
+					print ('Value (%d)-> %s & %s = %s' % (d,self.BITMAP[c] , self._TMP[d], (self.BITMAP[c] & self._TMP[d]) ))
 				if (self.BITMAP[c] & self._TMP[d]) ==  self._TMP[d]:
 					if d == 1: #  e o 8 bit
 						if self.DEBUG == True:
-							print 'Bit %s is present !!!' % ((c +1)* 8)
+							print ('Bit %s is present !!!' % ((c +1)* 8))
 						bits.append((c +1)* 8)
 						self.BITMAP_VALUES[(c +1)* 8] = 'X'
 					else:
 						if (c == 0) & (d == 2): # Continuation bit
 							if self.DEBUG == True:
-								print 'Bit 1 is present !!!' 
+								print ('Bit 1 is present !!!') 
 								
 							bits.append(1)
 	
 						else:
 							if self.DEBUG == True:
-								print 'Bit %s is present !!!' % (c * 8 + d - 1)
+								print ('Bit %s is present !!!' % (c * 8 + d - 1))
 								
 							bits.append(c * 8 + d - 1)
 							self.BITMAP_VALUES[c * 8 + d - 1] = 'X'
@@ -546,23 +546,23 @@ class ISO8583:
 		for c in range(0,16):
 			for d in range(1,9):
 				if self.DEBUG == True:
-					print 'Value (%d)-> %s & %s = %s' % (d,self.BITMAP[c] , self._TMP[d], (self.BITMAP[c] & self._TMP[d]) )
+					print ('Value (%d)-> %s & %s = %s' % (d,self.BITMAP[c] , self._TMP[d], (self.BITMAP[c] & self._TMP[d]) ))
 				if (self.BITMAP[c] & self._TMP[d]) ==  self._TMP[d]:
 					if d == 1: #  e o 8 bit
 						if self.DEBUG == True:
-							print 'Bit %s is present !!!' % ((c +1)* 8)
+							print ('Bit %s is present !!!' % ((c +1)* 8))
 							
 						bits.append((c +1)* 8)
 					else:
 						if (c == 0) & (d == 2): # Continuation bit
 							if self.DEBUG == True:
-								print 'Bit 1 is present !!!' 
+								print ('Bit 1 is present !!!') 
 	
 							bits.append(1)
 	
 						else:
 							if self.DEBUG == True:
-								print 'Bit %s is present !!!' % (c * 8 + d - 1)
+								print ('Bit %s is present !!!' % (c * 8 + d - 1))
 								
 							bits.append(c * 8 + d - 1)
 					
@@ -732,7 +732,7 @@ class ISO8583:
 		"""
 		
 		for cont in range(0,128):
-			if self.BITMAP_VALUES[cont] <> self._BIT_DEFAULT_VALUE:
+			if self.BITMAP_VALUES[cont] != self._BIT_DEFAULT_VALUE:
 				print("Bit[%s] of type %s has limit %s = %s"%(cont,self.getBitType(cont),self.getBitLimit(cont), self.BITMAP_VALUES[cont]) )
 				
 				
@@ -774,7 +774,7 @@ class ISO8583:
 		iso.setBit(17,17)
 		iso.setBit(99,99)
 		str = iso.getRawIso()
-		print 'This is the ASCII package %s' % str 
+		print ('This is the ASCII package %s' % str) 
 		output (print) -> This is the ASCII package 0800d010800000000000000000002000000001200000000000400001200170299
 		
 		@return: str with complete ASCII ISO8583
@@ -792,7 +792,7 @@ class ISO8583:
 		resp += self.BITMAP_HEX
 		
 		for cont in range(0,128):
-			if self.BITMAP_VALUES[cont] <> self._BIT_DEFAULT_VALUE:
+			if self.BITMAP_VALUES[cont] != self._BIT_DEFAULT_VALUE:
 				resp = "%s%s"%(resp, self.BITMAP_VALUES[cont]) 
 		
 		return resp
@@ -819,7 +819,7 @@ class ISO8583:
 		"""
 		
 		if self.DEBUG == True:
-			print 'Trying to redefine the bit with (self,%s,%s,%s,%s,%s,%s)' % (bit, smallStr, largeStr, bitType, size, valueType)
+			print ('Trying to redefine the bit with (self,%s,%s,%s,%s,%s,%s)' % (bit, smallStr, largeStr, bitType, size, valueType))
 		
 		#validating bit position
 		if bit == 1 or bit == 64 or bit < 0 or bit > 128:
@@ -831,7 +831,7 @@ class ISO8583:
 			if 	valueType == "a" or valueType == "n" or valueType == "ansb" or valueType == "ans" or valueType == "b" or valueType == "an" :
 				self._BITS_VALUE_TYPE[bit] = [smallStr, largeStr, bitType, size, valueType]
 				if self.DEBUG == True:
-					print 'Bit %d redefined!' % bit
+					print ('Bit %d redefined!' % bit)
 				
 			else:
 				raise InvalidValueType("Error bit %d cannot be changed because %s is not a valid valueType (a, an, n ansb, b)!" % (bit,valueType))
@@ -852,7 +852,7 @@ class ISO8583:
 		self.MESSAGE_TYPE_INDICATION = iso[0:4]
 		
 		if self.DEBUG == True:
-			print 'MTI found was %s' % self.MESSAGE_TYPE_INDICATION
+			print ('MTI found was %s' % self.MESSAGE_TYPE_INDICATION)
 		
 		
 	################################################################################################
@@ -904,40 +904,40 @@ class ISO8583:
 		"""
 	
 		if self.DEBUG == True:
-			print 'This is the input string <%s>' % strWithoutMtiBitmap
+			print ('This is the input string <%s>' % strWithoutMtiBitmap)
 			
 		offset = 0;
 		# jump bit 1 because it was alread defined in the "__inicializeBitsFromBitmapStr"
 		for cont in range(2,128):
-			if self.BITMAP_VALUES[cont] <> self._BIT_DEFAULT_VALUE:
+			if self.BITMAP_VALUES[cont] != self._BIT_DEFAULT_VALUE:
 				if self.DEBUG == True:
-					print 'String = %s offset = %s bit = %s' % (strWithoutMtiBitmap[offset:],offset,cont)
+					print ('String = %s offset = %s bit = %s' % (strWithoutMtiBitmap[offset:],offset,cont))
 					
 				if self.getBitType(cont) == 'LL':
 					valueSize = int(strWithoutMtiBitmap[offset:offset +2])
 					if self.DEBUG == True:
-						print 'Size of the message in LL = %s' %valueSize
+						print ('Size of the message in LL = %s' %valueSize)
 						
 					if valueSize > self.getBitLimit(cont):
 						raise ValueToLarge("This bit is larger than the especification!")
 					self.BITMAP_VALUES[cont] = strWithoutMtiBitmap[offset:offset+2]  + strWithoutMtiBitmap[offset+2:offset+2+valueSize]
 					
 					if self.DEBUG == True:
-						print '\tSetting bit %s value %s' % (cont,self.BITMAP_VALUES[cont])
+						print ('\tSetting bit %s value %s' % (cont,self.BITMAP_VALUES[cont]))
 					
 					offset += valueSize + 2
 					
 				if self.getBitType(cont) == 'LLL':
 					valueSize = int(strWithoutMtiBitmap[offset:offset +3])
 					if self.DEBUG == True:
-						print 'Size of the message in LLL = %s' %valueSize
+						print ('Size of the message in LLL = %s' %valueSize)
 						
 					if valueSize > self.getBitLimit(cont):
 						raise ValueToLarge("This bit is larger than the especification!")
 					self.BITMAP_VALUES[cont] = strWithoutMtiBitmap[offset:offset+3]  + strWithoutMtiBitmap[offset+3:offset+3+valueSize]
 					
 					if self.DEBUG == True:
-						print '\tSetting bit %s value %s' % (cont,self.BITMAP_VALUES[cont])
+						print ('\tSetting bit %s value %s' % (cont,self.BITMAP_VALUES[cont]))
 					
 					offset += valueSize + 3	
 						
@@ -952,7 +952,7 @@ class ISO8583:
 					self.BITMAP_VALUES[cont] = strWithoutMtiBitmap[offset:self.getBitLimit(cont)+offset]
 					
 					if self.DEBUG == True:
-						print '\tSetting bit %s value %s' % (cont,self.BITMAP_VALUES[cont])
+						print ('\tSetting bit %s value %s' % (cont,self.BITMAP_VALUES[cont]))
 					
 					offset += self.getBitLimit(cont)
 
@@ -976,7 +976,7 @@ class ISO8583:
 			print 'This ISO has bits:'
 			v3 = i2.getBitsAndValues()
 			for v in v3:
-				print 'Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value'])
+				print ('Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value']))
 				
 		@param: str -> complete ISO8583 string
 		@raise: InvalidIso8583 Exception
@@ -984,18 +984,18 @@ class ISO8583:
 		if len(iso) < 20:
 			raise InvalidIso8583('This is not a valid iso!!')
 		if self.DEBUG == True:
-			print 'ASCII to process <%s>' % iso
+			print ('ASCII to process <%s>' % iso)
 			
 		self.__setMTIFromStr(iso)
 		isoT = iso[4:]
 		self.__getBitmapFromStr(isoT)
 		self.__inicializeBitsFromBitmapStr(self.BITMAP_HEX)
 		if self.DEBUG == True:
-			print 'This is the array of bits (before) %s ' % self.BITMAP_VALUES
+			print ('This is the array of bits (before) %s ' % self.BITMAP_VALUES)
 			
 		self.__getBitFromStr(iso[4+len(self.BITMAP_HEX):])	
 		if self.DEBUG == True:
-			print 'This is the array of bits (after) %s ' % self.BITMAP_VALUES
+			print ('This is the array of bits (after) %s ' % self.BITMAP_VALUES)
 		
 		
 	################################################################################################
@@ -1021,9 +1021,9 @@ class ISO8583:
 
 			print 'Is equivalent?'
 			if p1 == p1:
-				print 'Yes :)'
+				print ('Yes :)')
 			else:
-				print 'Noooooooooo :('
+				print ('Noooooooooo :(')
 	
 		@param: obj2 -> object that will be compared
 		@return: <0 if is not equal, 0 if is equal
@@ -1056,13 +1056,13 @@ class ISO8583:
 			
 			v1 = p1.getBitsAndValues()
 			for v in v1:
-				print 'Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value'])
+				print ('Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value']))
 	
 		@return: array of values.
 		"""
 		ret = []
 		for cont in range(2,128):
-			if self.BITMAP_VALUES[cont] <> self._BIT_DEFAULT_VALUE:
+			if self.BITMAP_VALUES[cont] != self._BIT_DEFAULT_VALUE:
 				_TMP = {}
 				_TMP['bit'] =  "%d" % cont
 				_TMP['type'] = self.getBitType(cont)
@@ -1088,7 +1088,7 @@ class ISO8583:
 		arr = self.__getBitsFromBitmap()
 		
 		if self.DEBUG == True:
-			print 'This is the array of bits inside the bitmap %s' % arr
+			print ('This is the array of bits inside the bitmap %s' % arr)
 		
 		for v in arr:
 			if v == bit:
@@ -1121,7 +1121,7 @@ class ISO8583:
 			netIso += ascii
 			# Example: big-endian
 			# To little-endian, replace 'iso.getNetworkISO()' with 'iso.getNetworkISO(False)'
-			print 'This <%s> the same that <%s>' % (iso.getNetworkISO(),netIso)
+			print ('This <%s> the same that <%s>' % (iso.getNetworkISO(),netIso))
 		
 		@param: bigEndian (True|False) -> if you want that the size be represented in this way. 
 		@return: size + ASCII ISO8583 package ready to go to the network!
@@ -1134,11 +1134,11 @@ class ISO8583:
 		if bigEndian:
 			netIso = struct.pack('!h',len(asciiIso))
 			if self.DEBUG == True:
-				print 'Pack Big-endian'
+				print ('Pack Big-endian')
 		else:
 			netIso = struct.pack('<h',len(asciiIso))
 			if self.DEBUG == True:
-				print 'Pack Little-endian'
+				print ('Pack Little-endian')
 
 		netIso += asciiIso
 		
@@ -1171,7 +1171,7 @@ class ISO8583:
 			#newIso.setIsoContent(netIso[2:size])
 			arr = newIso.getBitsAndValues()
 			for v in arr:
-				print 'Bit %s Type %s Value = %s' % (v['bit'],v['type'],v['value'])
+				print ('Bit %s Type %s Value = %s' % (v['bit'],v['type'],v['value']))
 			
 			@param: iso -> str that represents size + ASCII ISO8583 package
 			@param: bigEndian (True|False) -> Codification of the size.
@@ -1185,11 +1185,11 @@ class ISO8583:
 		if bigEndian:
 			size = struct.unpack('!h',size)
 			if self.DEBUG == True:
-				print 'Unpack Big-endian'
+				print ('Unpack Big-endian')
 		else:
 			size = struct.unpack('<h',size)
 			if self.DEBUG == True:
-				print 'Unpack Little-endian'
+				print ('Unpack Little-endian')
 		
 		if len(iso) != (size[0] + 2):
 			raise InvalidIso8583('This is not a valid iso!!The ISO8583 ASCII(%s) is less than the size %s!' % (len(iso[2:]),size[0]))
