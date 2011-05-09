@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 from distutils.core import setup
+
 setup(name='ISO8583 Module',
-		version='1.0',
+		version='1.2',
 		description='ISO8583 LIBRARY',
 		author='Igor V. Custodio',
 		author_email='igorvc@vulcanno.com.br',

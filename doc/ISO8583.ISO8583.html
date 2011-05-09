@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="ISO8583.html"><font color="#ffffff">ISO8583</font></a>.ISO8583</strong></big></big> (version 0.1)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="ISO8583.html"><font color="#ffffff">ISO8583</font></a>.ISO8583</strong></big></big> (version 1.2)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:///C|/python25/lib/site-packages/iso8583/iso8583.py">c:\python25\lib\site-packages\iso8583\iso8583.py</a></font></td></tr></table>
     <p><tt>(C)&nbsp;Copyright&nbsp;2009&nbsp;Igor&nbsp;V.&nbsp;Custodio<br>
@@ -48,7 +48,39 @@ along&nbsp;with&nbsp;this&nbsp;program.&nbsp;&nbsp;If&nbsp;not,&nbsp;see&nbsp;&l
 <font color="#000000" face="helvetica, arial"><a name="ISO8583">class <strong>ISO8583</strong></a></font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Main&nbsp;Class&nbsp;to&nbsp;work&nbsp;with&nbsp;<a href="#ISO8583">ISO8583</a>&nbsp;packages.<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Main&nbsp;Class&nbsp;to&nbsp;work&nbsp;with&nbsp;<a href="#ISO8583">ISO8583</a>&nbsp;packages.<br>
+Used&nbsp;to&nbsp;create,&nbsp;change,&nbsp;send,&nbsp;receive,&nbsp;parse&nbsp;or&nbsp;work&nbsp;with&nbsp;ISO8593&nbsp;Package&nbsp;version&nbsp;1993.<br>
+It's&nbsp;100%&nbsp;Python&nbsp;:)<br>
+Enjoy&nbsp;it!<br>
+Thanks&nbsp;to:&nbsp;Vulcanno&nbsp;IT&nbsp;Solutions&nbsp;&lt;<a href="http://www.vulcanno.com.br">http://www.vulcanno.com.br</a>&gt;<br>
+Licence:&nbsp;GPL&nbsp;Version&nbsp;3<br>
+More&nbsp;information:&nbsp;<a href="http://code.google.com/p/iso8583py/">http://code.google.com/p/iso8583py/</a><br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;<a href="#ISO8583">ISO8583</a>.<a href="#ISO8583">ISO8583</a>&nbsp;import&nbsp;<a href="#ISO8583">ISO8583</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;<a href="#ISO8583">ISO8583</a>.ISOErrors&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso&nbsp;=&nbsp;<a href="#ISO8583">ISO8583</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso.<a href="#ISO8583-setMTI">setMTI</a>('0800')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso.<a href="#ISO8583-setBit">setBit</a>(2,2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso.<a href="#ISO8583-setBit">setBit</a>(4,4)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso.<a href="#ISO8583-setBit">setBit</a>(12,12)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso.<a href="#ISO8583-setBit">setBit</a>(21,21)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso.<a href="#ISO8583-setBit">setBit</a>(17,17)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso.<a href="#ISO8583-setBit">setBit</a>(49,986)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso.<a href="#ISO8583-setBit">setBit</a>(99,99)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;ValueToLarge,&nbsp;e:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('Value&nbsp;too&nbsp;large&nbsp;:(&nbsp;%s'&nbsp;%&nbsp;e)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;InvalidMTI,&nbsp;i:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('This&nbsp;MTI&nbsp;is&nbsp;wrong&nbsp;:(&nbsp;%s'&nbsp;%&nbsp;i)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('The&nbsp;Message&nbsp;Type&nbsp;Indication&nbsp;is&nbsp;=&nbsp;%s'&nbsp;%iso.<a href="#ISO8583-getMTI">getMTI</a>())&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('The&nbsp;Bitmap&nbsp;is&nbsp;=&nbsp;%s'&nbsp;%iso.<a href="#ISO8583-getBitmap">getBitmap</a>())&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iso.<a href="#ISO8583-showIsoBits">showIsoBits</a>();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('This&nbsp;is&nbsp;the&nbsp;<a href="#ISO8583">ISO8583</a>&nbsp;complete&nbsp;package&nbsp;%s'&nbsp;%&nbsp;iso.<a href="#ISO8583-getRawIso">getRawIso</a>())<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('This&nbsp;is&nbsp;the&nbsp;<a href="#ISO8583">ISO8583</a>&nbsp;complete&nbsp;package&nbsp;to&nbsp;sent&nbsp;over&nbsp;the&nbsp;TCPIP&nbsp;network&nbsp;%s'&nbsp;%&nbsp;iso.<a href="#ISO8583-getNetworkISO">getNetworkISO</a>())<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="ISO8583-__cmp__"><strong>__cmp__</strong></a>(self, obj2)</dt><dd><tt>Method&nbsp;that&nbsp;compare&nbsp;two&nbsp;objects&nbsp;in&nbsp;"==",&nbsp;"!="&nbsp;and&nbsp;other&nbsp;things<br>
@@ -69,9 +101,9 @@ Example:<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'Is&nbsp;equivalent?'<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;p1&nbsp;==&nbsp;p1:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'Yes&nbsp;:)'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('Yes&nbsp;:)')<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'Noooooooooo&nbsp;:('<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('Noooooooooo&nbsp;:(')<br>
 &nbsp;<br>
 @param:&nbsp;obj2&nbsp;-&gt;&nbsp;object&nbsp;that&nbsp;will&nbsp;be&nbsp;compared<br>
 @return:&nbsp;&lt;0&nbsp;if&nbsp;is&nbsp;not&nbsp;equal,&nbsp;0&nbsp;if&nbsp;is&nbsp;equal</tt></dd></dl>
@@ -120,7 +152,7 @@ Example:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v1&nbsp;=&nbsp;p1.<a href="#ISO8583-getBitsAndValues">getBitsAndValues</a>()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;v&nbsp;in&nbsp;v1:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'Bit&nbsp;%s&nbsp;of&nbsp;type&nbsp;%s&nbsp;with&nbsp;value&nbsp;=&nbsp;%s'&nbsp;%&nbsp;(v['bit'],v['type'],v['value'])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('Bit&nbsp;%s&nbsp;of&nbsp;type&nbsp;%s&nbsp;with&nbsp;value&nbsp;=&nbsp;%s'&nbsp;%&nbsp;(v['bit'],v['type'],v['value']))<br>
 &nbsp;<br>
 @return:&nbsp;array&nbsp;of&nbsp;values.</tt></dd></dl>
 
@@ -146,7 +178,7 @@ Is&nbsp;the&nbsp;same&nbsp;that:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netIso&nbsp;+=&nbsp;ascii<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Example:&nbsp;big-endian<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;To&nbsp;little-endian,&nbsp;replace&nbsp;'iso.<a href="#ISO8583-getNetworkISO">getNetworkISO</a>()'&nbsp;with&nbsp;'iso.<a href="#ISO8583-getNetworkISO">getNetworkISO</a>(False)'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'This&nbsp;&lt;%s&gt;&nbsp;the&nbsp;same&nbsp;that&nbsp;&lt;%s&gt;'&nbsp;%&nbsp;(iso.<a href="#ISO8583-getNetworkISO">getNetworkISO</a>(),netIso)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('This&nbsp;&lt;%s&gt;&nbsp;the&nbsp;same&nbsp;that&nbsp;&lt;%s&gt;'&nbsp;%&nbsp;(iso.<a href="#ISO8583-getNetworkISO">getNetworkISO</a>(),netIso))<br>
 &nbsp;<br>
 @param:&nbsp;bigEndian&nbsp;(True|False)&nbsp;-&gt;&nbsp;if&nbsp;you&nbsp;want&nbsp;that&nbsp;the&nbsp;size&nbsp;be&nbsp;represented&nbsp;in&nbsp;this&nbsp;way.&nbsp;<br>
 @return:&nbsp;size&nbsp;+&nbsp;ASCII&nbsp;<a href="#ISO8583">ISO8583</a>&nbsp;package&nbsp;ready&nbsp;to&nbsp;go&nbsp;to&nbsp;the&nbsp;network!<br>
@@ -162,7 +194,7 @@ iso.<a href="#ISO8583-setBit">setBit</a>(12,12)<br>
 iso.<a href="#ISO8583-setBit">setBit</a>(17,17)<br>
 iso.<a href="#ISO8583-setBit">setBit</a>(99,99)<br>
 str&nbsp;=&nbsp;iso.<a href="#ISO8583-getRawIso">getRawIso</a>()<br>
-print&nbsp;'This&nbsp;is&nbsp;the&nbsp;ASCII&nbsp;package&nbsp;%s'&nbsp;%&nbsp;str&nbsp;<br>
+print&nbsp;('This&nbsp;is&nbsp;the&nbsp;ASCII&nbsp;package&nbsp;%s'&nbsp;%&nbsp;str)&nbsp;<br>
 output&nbsp;(print)&nbsp;-&gt;&nbsp;This&nbsp;is&nbsp;the&nbsp;ASCII&nbsp;package&nbsp;0800d010800000000000000000002000000001200000000000400001200170299<br>
 &nbsp;<br>
 @return:&nbsp;str&nbsp;with&nbsp;complete&nbsp;ASCII&nbsp;<a href="#ISO8583">ISO8583</a><br>
@@ -205,7 +237,7 @@ Example:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'This&nbsp;ISO&nbsp;has&nbsp;bits:'<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v3&nbsp;=&nbsp;i2.<a href="#ISO8583-getBitsAndValues">getBitsAndValues</a>()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;v&nbsp;in&nbsp;v3:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'Bit&nbsp;%s&nbsp;of&nbsp;type&nbsp;%s&nbsp;with&nbsp;value&nbsp;=&nbsp;%s'&nbsp;%&nbsp;(v['bit'],v['type'],v['value'])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('Bit&nbsp;%s&nbsp;of&nbsp;type&nbsp;%s&nbsp;with&nbsp;value&nbsp;=&nbsp;%s'&nbsp;%&nbsp;(v['bit'],v['type'],v['value']))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 @param:&nbsp;str&nbsp;-&gt;&nbsp;complete&nbsp;<a href="#ISO8583">ISO8583</a>&nbsp;string<br>
 @raise:&nbsp;InvalidIso8583&nbsp;Exception</tt></dd></dl>
@@ -236,7 +268,7 @@ newIso.<a href="#ISO8583-setNetworkISO">setNetworkISO</a>(netIso)<br>
 #newIso.<a href="#ISO8583-setIsoContent">setIsoContent</a>(netIso[2:size])<br>
 arr&nbsp;=&nbsp;newIso.<a href="#ISO8583-getBitsAndValues">getBitsAndValues</a>()<br>
 for&nbsp;v&nbsp;in&nbsp;arr:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'Bit&nbsp;%s&nbsp;Type&nbsp;%s&nbsp;Value&nbsp;=&nbsp;%s'&nbsp;%&nbsp;(v['bit'],v['type'],v['value'])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;('Bit&nbsp;%s&nbsp;Type&nbsp;%s&nbsp;Value&nbsp;=&nbsp;%s'&nbsp;%&nbsp;(v['bit'],v['type'],v['value']))<br>
 &nbsp;<br>
 @param:&nbsp;iso&nbsp;-&gt;&nbsp;str&nbsp;that&nbsp;represents&nbsp;size&nbsp;+&nbsp;ASCII&nbsp;<a href="#ISO8583">ISO8583</a>&nbsp;package<br>
 @param:&nbsp;bigEndian&nbsp;(True|False)&nbsp;-&gt;&nbsp;Codification&nbsp;of&nbsp;the&nbsp;size.<br>
@@ -287,7 +319,7 @@ Hint:&nbsp;Try&nbsp;to&nbsp;use&nbsp;getRawIso&nbsp;method&nbsp;and&nbsp;format&
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>__author__</strong> = 'Igor Vitorio Custodio &lt;igorvc@vulcanno.com.br&gt;'<br>
 <strong>__licence__</strong> = 'GPL V3'<br>
-<strong>__version__</strong> = '0.1'</td></tr></table><p>
+<strong>__version__</strong> = '1.2'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>

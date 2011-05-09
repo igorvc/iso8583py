@@ -26,7 +26,7 @@ import time
 
 
 # Configure the client
-serverIP = "192.168.0.100" 
+serverIP = "192.168.0.103" 
 serverPort = 8583
 numberEcho = 5
 timeBetweenEcho = 5 # in seconds
@@ -50,7 +50,7 @@ for res in socket.getaddrinfo(serverIP, serverPort, socket.AF_UNSPEC, socket.SOC
 	continue
     break
 if s is None:
-    print 'Could not connect :('
+    print ('Could not connect :(')
     sys.exit(1)
 	
 	
@@ -67,19 +67,19 @@ for req in range(0,numberEcho):
 		try:
 			message = iso.getNetworkISO() 
 			s.send(message)
-			print 'Sending ... %s' % message
+			print ('Sending ... %s' % message)
 			ans = s.recv(2048)
-			print "\nInput ASCII |%s|" % ans
+			print ("\nInput ASCII |%s|" % ans)
 			isoAns = ISO8583()
 			isoAns.setNetworkISO(ans)
 			v1 = isoAns.getBitsAndValues()
 			for v in v1:
-				print 'Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value'])
+				print ('Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value']))
 				
 			if isoAns.getMTI() == '0810':
-				print "\tThat's great !!! The server understand my message !!!"
+				print ("\tThat's great !!! The server understand my message !!!")
 			else:
-				print "The server dosen't understand my message!"
+				print ("The server dosen't understand my message!")
 					
 		except InvalidIso8583, ii:
 			print ii
@@ -92,19 +92,19 @@ for req in range(0,numberEcho):
 		try:
 			message = iso.getNetworkISO(False) 
 			s.send(message)
-			print 'Sending ... %s' % message
+			print ('Sending ... %s' % message)
 			ans = s.recv(2048)
-			print "\nInput ASCII |%s|" % ans
+			print ("\nInput ASCII |%s|" % ans)
 			isoAns = ISO8583()
 			isoAns.setNetworkISO(ans,False)
 			v1 = isoAns.getBitsAndValues()
 			for v in v1:
-				print 'Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value'])
+				print ('Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value']))
 					
 			if isoAns.getMTI() == '0810':
-				print "\tThat's great !!! The server understand my message !!!"
+				print ("\tThat's great !!! The server understand my message !!!")
 			else:
-				print "The server dosen't understand my message!"
+				print ("The server dosen't understand my message!")
 			
 		except InvalidIso8583, ii:
 			print ii
@@ -114,6 +114,6 @@ for req in range(0,numberEcho):
 
 		
 		
-print 'Closing...'		
+print ('Closing...')		
 s.close()		
 		

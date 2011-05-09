@@ -35,8 +35,8 @@ p2.setBit(12,12)
 p2.setBit(17,17)
 p2.setBit(99,99)
 
-print 'The MTI is = %s' %p2.getMTI() 
-print 'The Bitmap is = %s' %p2.getBitmap() 
+print ('The MTI is = %s' %p2.getMTI()) 
+print ('The Bitmap is = %s' %p2.getBitmap()) 
 
 #Showing bits...
 p2.showIsoBits();
@@ -44,8 +44,8 @@ p2.showIsoBits();
 #Save the ASCII ISO value without size
 iso = p2.getRawIso()
 
-print '\n\n\n------------------------------------------\n'
-print 'This is the ISO <%s> that will be interpreted' % iso
+print ('\n\n\n------------------------------------------\n')
+print ('This is the ISO <%s> that will be interpreted' % iso)
 
 # New ISO
 i = ISO8583()
@@ -53,21 +53,21 @@ i = ISO8583()
 i.setIsoContent(iso)
 
 # Showing that everything is ok
-print 'The MTI is = %s' %i.getMTI() 
-print 'The Bitmap is = %s' %i.getBitmap() 
-print 'Show bits inside the package'
+print ('The MTI is = %s' %i.getMTI()) 
+print ('The Bitmap is = %s' %i.getBitmap()) 
+print ('Show bits inside the package')
 i.showIsoBits()
 
 # Using == to compare ISOS's
-print 'Compare ISOs ...'
+print ('Compare ISOs ...')
 if i == p2:
-	print 'They are equivalent!'
+	print ('They are equivalent!')
 	
 else:
-	print 'The are differente'
+	print ('The are differente')
 	
 # More example...	
-print '\n\n\n------------------------------------------\n'	
+print ('\n\n\n------------------------------------------\n')	
 
 i3=ISO8583()
 i3.setMTI('0800')
@@ -79,6 +79,6 @@ i3.setBit(63,'123testing')
 
 i3.showIsoBits()
 
-print 'This is the pack %s' %i3.getRawIso()	
+print ('This is the pack %s' %i3.getRawIso())	
 
 	

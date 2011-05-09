@@ -23,7 +23,7 @@ from ISO8583.ISOErrors import *
 from socket import *
 
 # Configure the server
-serverIP = "192.168.0.100" 
+serverIP = "192.168.0.103" 
 serverPort = 8583
 maxConn = 5
 bigEndian = True
@@ -46,7 +46,7 @@ while 1:
 		# receive message
 		isoStr = connection.recv(2048) 
 		if isoStr:
-			print "\nInput ASCII |%s|" % isoStr
+			print ("\nInput ASCII |%s|" % isoStr)
 			pack = ISO8583()
 			#parse the iso
 			try:
@@ -57,12 +57,12 @@ while 1:
 			
 				v1 = pack.getBitsAndValues()
 				for v in v1:
-					print 'Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value'])
+					print ('Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value']))
 					
 				if pack.getMTI() == '0800':
-					print "\tThat's great !!! The client send a correct message !!!"
+					print ("\tThat's great !!! The client send a correct message !!!")
 				else:
-					print "The client dosen't send the correct message!"	
+					print ("The client dosen't send the correct message!")	
 					break
 					
 					
@@ -70,7 +70,7 @@ while 1:
 				print ii
 				break
 			except:
-				print 'Something happened!!!!'
+				print ('Something happened!!!!')
 				break
 			
 			#send answer
@@ -81,11 +81,11 @@ while 1:
 			else:
 				ans = pack.getNetworkISO(False)
 				
-			print 'Sending answer %s' % ans
+			print ('Sending answer %s' % ans)
 			connection.send(ans)
 			
 		else:
 			break
 	# close socket		
 	connection.close()             
-	print "Closed..."
+	print ("Closed...")
