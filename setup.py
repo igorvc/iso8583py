@@ -61,7 +61,15 @@ setup(name='ISO8583 Module',
 		'Natural Language :: Thai',
 		'Natural Language :: Turkish',
 		'Natural Language :: Ukranian',
-		'Natural Language :: Vietnamese '
+		'Natural Language :: Vietnamese ',
+		'Programming Language :: Python :: 2.5',
+		'Programming Language :: Python :: 2.6',
+		'Programming Language :: Python :: 2.7',
+		'Programming Language :: Python :: 3',
+		'Programming Language :: Python :: 3.0',
+		'Programming Language :: Python :: 3.1',
+		'Programming Language :: Python :: 3.2'
+		
       ]
      )
 
