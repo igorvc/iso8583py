@@ -104,7 +104,7 @@ while 1:
 					
 					
 			except InvalidIso8583, ii:
-				print ii
+				print (ii)
 				break
 			except:
 				print ('Something happened!!!!')
@@ -217,7 +217,7 @@ for req in range(0,numberEcho):
 				print ("The server dosen't understand my message!")
 					
 		except InvalidIso8583, ii:
-			print ii
+			print (ii)
 			break	
 		
 
@@ -242,7 +242,7 @@ for req in range(0,numberEcho):
 				print ("The server dosen't understand my message!")
 			
 		except InvalidIso8583, ii:
-			print ii
+			print (ii)
 			break	
 		
 		time.sleep(timeBetweenEcho)
