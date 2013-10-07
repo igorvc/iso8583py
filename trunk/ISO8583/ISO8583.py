@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 __author__ =  'Igor Vitorio Custodio <igorvc@vulcanno.com.br>'
-__version__=  '1.2'
+__version__=  '1.3'
 __licence__ = 'GPL V3'
 
 
@@ -349,10 +349,10 @@ class ISO8583:
 			print ('Init bitmap_values')
 			
 		if len(self.BITMAP_VALUES) == 128:
-			for cont in range(0,128):
+			for cont in range(0,129):
 				self.BITMAP_VALUES[cont] = self._BIT_DEFAULT_VALUE
 		else:
-			for cont in range(0,128):
+			for cont in range(0,129):
 				self.BITMAP_VALUES.append(self._BIT_DEFAULT_VALUE)
 	################################################################################################		
 	
@@ -731,7 +731,7 @@ class ISO8583:
 			(...)
 		"""
 		
-		for cont in range(0,128):
+		for cont in range(0,129):
 			if self.BITMAP_VALUES[cont] != self._BIT_DEFAULT_VALUE:
 				print("Bit[%s] of type %s has limit %s = %s"%(cont,self.getBitType(cont),self.getBitLimit(cont), self.BITMAP_VALUES[cont]) )
 				
