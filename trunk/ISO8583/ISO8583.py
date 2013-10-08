@@ -422,7 +422,7 @@ class ISO8583:
 		self.__buildBitmap()
 		
 		# printing		
-		print self.BITMAP_HEX
+		print (self.BITMAP_HEX)
 	################################################################################################	
 	
 	################################################################################################	
@@ -756,7 +756,7 @@ class ISO8583:
 		"""
 		
 		resp = self.getRawIso()
-		print resp
+		print(resp)
 
 	
 	################################################################################################	
@@ -791,7 +791,7 @@ class ISO8583:
 		resp += self.MESSAGE_TYPE_INDICATION
 		resp += self.BITMAP_HEX
 		
-		for cont in range(0,128):
+		for cont in range(0,129):
 			if self.BITMAP_VALUES[cont] != self._BIT_DEFAULT_VALUE:
 				resp = "%s%s"%(resp, self.BITMAP_VALUES[cont]) 
 		
@@ -908,7 +908,7 @@ class ISO8583:
 			
 		offset = 0;
 		# jump bit 1 because it was alread defined in the "__inicializeBitsFromBitmapStr"
-		for cont in range(2,128):
+		for cont in range(2,129):
 			if self.BITMAP_VALUES[cont] != self._BIT_DEFAULT_VALUE:
 				if self.DEBUG == True:
 					print ('String = %s offset = %s bit = %s' % (strWithoutMtiBitmap[offset:],offset,cont))
@@ -970,10 +970,10 @@ class ISO8583:
 			# the rest remain, so we use "get" :)
 			i2.redefineBit(42, '42', i2.getLargeBitName(42), 'N', i2.getBitLimit(42), i2.getBitValueType(42) )
 			i2.setIsoContent(iso2)
-			print 'Bitmap = %s' %i2.getBitmap() 
-			print 'MTI = %s' %i2.getMTI() 
+			print ('Bitmap = %s' %i2.getBitmap()) 
+			print ('MTI = %s' %i2.getMTI() )
 
-			print 'This ISO has bits:'
+			print ('This ISO has bits:')
 			v3 = i2.getBitsAndValues()
 			for v in v3:
 				print ('Bit %s of type %s with value = %s' % (v['bit'],v['type'],v['value']))
@@ -1019,7 +1019,7 @@ class ISO8583:
 			p2 = ISO8583()
 			p2.setIsoContent(iso)
 
-			print 'Is equivalent?'
+			print ('Is equivalent?')
 			if p1 == p1:
 				print ('Yes :)')
 			else:
@@ -1061,7 +1061,7 @@ class ISO8583:
 		@return: array of values.
 		"""
 		ret = []
-		for cont in range(2,128):
+		for cont in range(2,129):
 			if self.BITMAP_VALUES[cont] != self._BIT_DEFAULT_VALUE:
 				_TMP = {}
 				_TMP['bit'] =  "%d" % cont
