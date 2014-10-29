@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 __author__ =  'Igor Vitorio Custodio <igorvc@vulcanno.com.br>'
-__version__=  '1.3'
+__version__=  '1.3.1'
 __licence__ = 'GPL V3'
 
 
@@ -105,7 +105,7 @@ class ISO8583:
 	_BITS_VALUE_TYPE[15] = ['15','Date settlement','N',4,'n']
 	_BITS_VALUE_TYPE[16] = ['16','Date conversion','N',4,'n']
 	_BITS_VALUE_TYPE[17] = ['17','Date capture','N',4,'n']
-	_BITS_VALUE_TYPE[18] = ['18','Message error indicator','LLL',4,'n']
+	_BITS_VALUE_TYPE[18] = ['18','Message error indicator','N',4,'n']
 	_BITS_VALUE_TYPE[19] = ['19','Country code acquiring institution','N',3,'n']
 	_BITS_VALUE_TYPE[20] = ['20','Country code primary account number (PAN)','N',3,'n']
 	_BITS_VALUE_TYPE[21] = ['21','Transaction life cycle identification data','ANS',3,'n']
