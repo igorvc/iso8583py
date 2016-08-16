@@ -23,7 +23,7 @@ from ISO8583.ISOErrors import *
 from socket import *
 
 # Configure the server
-serverIP = "192.168.0.103" 
+serverIP = "127.0.0.1" 
 serverPort = 8583
 maxConn = 5
 bigEndian = True
