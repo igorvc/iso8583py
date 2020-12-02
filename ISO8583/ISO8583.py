@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 __author__ =  'Igor Vitorio Custodio <igorvc@vulcanno.com.br>'
-__version__=  '1.3.1'
+__version__=  '2.0.0'
 __licence__ = 'GPL V3'
 
 
@@ -367,7 +367,8 @@ class ISO8583:
 		@raise: BitInexistent Exception, ValueToLarge Exception
 		"""
 		if self.DEBUG == True:
-			print ('Setting bit inside bitmap bit[%s] = %s') % (bit, value)
+			print ('Setting bit (type=%s) inside bitmap bit[%s] = %s') % (self.getBitType(bit), bit, value)
+			
 			
 		if bit < 1 or bit > 128:
 			raise BitInexistent("Bit number %s dosen't exist!" % bit)
@@ -384,7 +385,7 @@ class ISO8583:
 		if self.getBitType(bit) == 'N' :
 			self.__setBitTypeN(bit, value)
 			
-		if self.getBitType(bit) == 'A':
+		if self.getBitType(bit) == 'A' or self.getBitType(bit) == 'AN':
 			self.__setBitTypeA(bit, value)	
 		
 		if self.getBitType(bit) == 'ANS' or self.getBitType(bit) == 'B':
@@ -1197,3 +1198,6 @@ class ISO8583:
 		self.setIsoContent(iso[2:])	
 	
 	################################################################################################	
+
+
+	
