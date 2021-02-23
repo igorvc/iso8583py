@@ -95,6 +95,15 @@ Example:<br>
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="ISO8583Postilion-__init__"><strong>__init__</strong></a>(self, iso<font color="#909090">=''</font>, debug<font color="#909090">=False</font>)</dt><dd><tt>Default&nbsp;Constructor&nbsp;of&nbsp;<a href="#ISO8583Postilion">ISO8583Postilion</a>&nbsp;Package.<br>
+It&nbsp;inicialize&nbsp;a&nbsp;"brand&nbsp;new"&nbsp;<a href="#ISO8583Postilion">ISO8583Postilion</a>&nbsp;package<br>
+Example:&nbsp;To&nbsp;Enable&nbsp;debug&nbsp;you&nbsp;can&nbsp;use:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pack&nbsp;=&nbsp;<a href="#ISO8583Postilion">ISO8583Postilion</a>(debug=True)<br>
+@param:&nbsp;iso&nbsp;a&nbsp;String&nbsp;that&nbsp;represents&nbsp;the&nbsp;ASCII&nbsp;of&nbsp;the&nbsp;package.&nbsp;The&nbsp;same&nbsp;that&nbsp;you&nbsp;need&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#ISO8583Postilion-setIsoContent">setIsoContent</a>()&nbsp;method.<br>
+@param:&nbsp;debug&nbsp;(True&nbsp;or&nbsp;False)&nbsp;default&nbsp;False&nbsp;-&gt;&nbsp;Used&nbsp;to&nbsp;print&nbsp;some&nbsp;debug&nbsp;infos.&nbsp;Only&nbsp;use&nbsp;if&nbsp;want&nbsp;that&nbsp;messages!</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="ISO8583.ISO8583.html#ISO8583">ISO8583.ISO8583.ISO8583</a>:<br>
 <dl><dt><a name="ISO8583Postilion-__cmp__"><strong>__cmp__</strong></a>(self, obj2)</dt><dd><tt>Method&nbsp;that&nbsp;compare&nbsp;two&nbsp;objects&nbsp;in&nbsp;"==",&nbsp;"!="&nbsp;and&nbsp;other&nbsp;things<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;p1&nbsp;=&nbsp;<a href="ISO8583.ISO8583.html#ISO8583">ISO8583</a>()<br>
@@ -119,13 +128,6 @@ Example:<br>
 &nbsp;<br>
 @param:&nbsp;obj2&nbsp;-&gt;&nbsp;object&nbsp;that&nbsp;will&nbsp;be&nbsp;compared<br>
 @return:&nbsp;&lt;0&nbsp;if&nbsp;is&nbsp;not&nbsp;equal,&nbsp;0&nbsp;if&nbsp;is&nbsp;equal</tt></dd></dl>
-
-<dl><dt><a name="ISO8583Postilion-__init__"><strong>__init__</strong></a>(self, iso<font color="#909090">=''</font>, debug<font color="#909090">=False</font>)</dt><dd><tt>Default&nbsp;Constructor&nbsp;of&nbsp;<a href="ISO8583.ISO8583.html#ISO8583">ISO8583</a>&nbsp;Package.<br>
-It&nbsp;inicialize&nbsp;a&nbsp;"brand&nbsp;new"&nbsp;<a href="ISO8583.ISO8583.html#ISO8583">ISO8583</a>&nbsp;package<br>
-Example:&nbsp;To&nbsp;Enable&nbsp;debug&nbsp;you&nbsp;can&nbsp;use:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;pack&nbsp;=&nbsp;<a href="ISO8583.ISO8583.html#ISO8583">ISO8583</a>(debug=True)<br>
-@param:&nbsp;iso&nbsp;a&nbsp;String&nbsp;that&nbsp;represents&nbsp;the&nbsp;ASCII&nbsp;of&nbsp;the&nbsp;package.&nbsp;The&nbsp;same&nbsp;that&nbsp;you&nbsp;need&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#ISO8583Postilion-setIsoContent">setIsoContent</a>()&nbsp;method.<br>
-@param:&nbsp;debug&nbsp;(True&nbsp;or&nbsp;False)&nbsp;default&nbsp;False&nbsp;-&gt;&nbsp;Used&nbsp;to&nbsp;print&nbsp;some&nbsp;debug&nbsp;infos.&nbsp;Only&nbsp;use&nbsp;if&nbsp;want&nbsp;that&nbsp;messages!</tt></dd></dl>
 
 <dl><dt><a name="ISO8583Postilion-getBit"><strong>getBit</strong></a>(self, bit)</dt><dd><tt>Return&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;bit<br>
 @param:&nbsp;bit&nbsp;-&gt;&nbsp;the&nbsp;number&nbsp;of&nbsp;the&nbsp;bit&nbsp;that&nbsp;you&nbsp;want&nbsp;the&nbsp;value<br>
@@ -236,7 +238,7 @@ Hint:&nbsp;If&nbsp;you&nbsp;have&nbsp;a&nbsp;lot&nbsp;of&nbsp;"ValueToLarge&nbsp
 @param:&nbsp;smallStr&nbsp;-&gt;&nbsp;a&nbsp;small&nbsp;String&nbsp;representantion&nbsp;of&nbsp;the&nbsp;bit,&nbsp;used&nbsp;to&nbsp;build&nbsp;"user&nbsp;friendly&nbsp;prints",&nbsp;example&nbsp;"2"&nbsp;for&nbsp;bit&nbsp;2<br>
 @param:&nbsp;largeStr&nbsp;-&gt;&nbsp;a&nbsp;large&nbsp;String&nbsp;representantion&nbsp;of&nbsp;the&nbsp;bit,&nbsp;used&nbsp;to&nbsp;build&nbsp;"user&nbsp;friendly&nbsp;prints"&nbsp;and&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;inform&nbsp;the&nbsp;"main&nbsp;use&nbsp;of&nbsp;the&nbsp;bit",&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;example&nbsp;"Primary&nbsp;account&nbsp;number&nbsp;(PAN)"&nbsp;for&nbsp;bit&nbsp;2<br>
-@param:&nbsp;bitType&nbsp;-&gt;&nbsp;type&nbsp;the&nbsp;bit,&nbsp;used&nbsp;to&nbsp;build&nbsp;the&nbsp;values,&nbsp;example&nbsp;"LL"&nbsp;for&nbsp;bit&nbsp;2.&nbsp;Need&nbsp;to&nbsp;be&nbsp;one&nbsp;of&nbsp;(B,&nbsp;N,&nbsp;AN,&nbsp;ANS,&nbsp;LL,&nbsp;LLL)&nbsp;&nbsp;&nbsp;&nbsp;<br>
+@param:&nbsp;bitType&nbsp;-&gt;&nbsp;type&nbsp;the&nbsp;bit,&nbsp;used&nbsp;to&nbsp;build&nbsp;the&nbsp;values,&nbsp;example&nbsp;"LL"&nbsp;for&nbsp;bit&nbsp;2.&nbsp;Need&nbsp;to&nbsp;be&nbsp;one&nbsp;of&nbsp;(B,&nbsp;N,&nbsp;AN,&nbsp;ANS,&nbsp;LL,&nbsp;LLL,&nbsp;XN)&nbsp;&nbsp;&nbsp;&nbsp;<br>
 @param:&nbsp;size&nbsp;-&gt;&nbsp;limit&nbsp;size&nbsp;the&nbsp;bit,&nbsp;used&nbsp;to&nbsp;build/complete&nbsp;the&nbsp;values,&nbsp;example&nbsp;"19"&nbsp;for&nbsp;bit&nbsp;2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 @param:&nbsp;valueType&nbsp;-&gt;&nbsp;value&nbsp;type&nbsp;the&nbsp;bit,&nbsp;used&nbsp;to&nbsp;"validate"&nbsp;the&nbsp;values,&nbsp;example&nbsp;"n"&nbsp;for&nbsp;bit&nbsp;2.&nbsp;This&nbsp;mean&nbsp;that&nbsp;in&nbsp;bit&nbsp;2&nbsp;we&nbsp;need&nbsp;to&nbsp;have&nbsp;only&nbsp;numeric&nbsp;values.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Need&nbsp;to&nbsp;be&nbsp;one&nbsp;of&nbsp;(a,&nbsp;an,&nbsp;n,&nbsp;ansb,&nbsp;b)<br>

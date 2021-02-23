@@ -86,6 +86,10 @@ class ISO8583(object):
     _BITS_VALID_TYPES = [
             'b', 'a', 'n', 'an', 'ans', 'll', 'lll', 'xn'
         ]
+    # now we will use a best way to detect invalid bit type
+    _BITS_VALID_VALUE_TYPES = [
+            'a', 'n', 'an', 'ansb', 'b'
+        ]
     
     #ISO8583 contants
     _BITS_VALUE_TYPE = {}
@@ -385,10 +389,28 @@ class ISO8583(object):
             return False
 
         return False
+    ################################################################################################  
 
+        ################################################################################################
+    # validate bit Type using _BITS_VALID_TYPES array
+    def __validateValueType(self, value):
+        """Method that validate the bit type using a _BITS_VALID_TYPES array
+        It's a internal method, so don't call!
+        @param: type -> type to check
+        @return: True/False , if type is valid, return True
+        """
+        if self.DEBUG:
+            print ('Validating bit value = %s' % value )
+            
+        try:
+            tmp = self._BITS_VALID_VALUE_TYPES.index(value.upper())
+            if self.DEBUG:
+                print ('%s is a Valid Value! (%s)' % (value, tmp) )
+            return True
+        except ValueError:
+            return False
 
-
-
+        return False
     ################################################################################################        
     
     ################################################################################################
@@ -881,7 +903,7 @@ class ISO8583(object):
         """
         
         if self.DEBUG:
-            print ('Trying to redefine the bit with (self,%s,%s,%s,%s,%s,%s)' % (bit, smallStr, largeStr, bitType, size, valueType))
+            print ('Trying to redefine the bit with (self, %s, %s, %s, %s, %s, %s)' % (bit, smallStr, largeStr, bitType, size, valueType))
         
         #validating bit position
         if bit == 1 or bit == 64 or bit < 0 or bit > 128:
@@ -890,17 +912,17 @@ class ISO8583(object):
         #need to validate if the type and size is compatible! example slimit = 100 and type = LL
             
         #refactoring to use validate method...
-        if     bitType == "B" or bitType == "N" or bitType == "AN" or bitType == "ANS" or bitType == "LL" or bitType == "LLL":
-            if     valueType == "a" or valueType == "n" or valueType == "ansb" or valueType == "ans" or valueType == "b" or valueType == "an" :
+        if self.__validateBitType(bitType) :
+            if self.__validateValueType(valueType) :
                 self._BITS_VALUE_TYPE[bit] = [smallStr, largeStr, bitType, size, valueType]
                 if self.DEBUG:
                     print ('Bit %d redefined!' % bit)
                 
             else:
-                raise InvalidValueType("Error bit %d cannot be changed because %s is not a valid valueType (a, an, n ansb, b)!" % (bit,valueType))
+                raise InvalidValueType("Error bit %d cannot be changed because %s is not a valid valueType (a, an, n, ansb, b, xn)!" % (bit,valueType))
                 #return
         else:
-            raise InvalidBitType("Error bit %d cannot be changed because %s is not a valid bitType (Hex, N, AN, ANS, LL, LLL)!" % (bit,bitType))
+            raise InvalidBitType("Error bit %d cannot be changed because %s is not a valid bitType (Hex, N, AN, ANS, LL, LLL, XN)!" % (bit,bitType))
             #return
                 
     ################################################################################################    
@@ -979,7 +1001,7 @@ class ISO8583(object):
                 if self.getBitType(cont) == 'LL':
                     valueSize = int(strWithoutMtiBitmap[offset:offset +2])
                     if self.DEBUG:
-                        print ('Size of the message in LL = %s' %valueSize)
+                        print ('Size of the message in LL = %s' % valueSize)
                         
                     if valueSize > self.getBitLimit(cont):
                         raise ValueToLarge("This bit is larger than the especification!")
@@ -993,14 +1015,14 @@ class ISO8583(object):
                 if self.getBitType(cont) == 'LLL':
                     valueSize = int(strWithoutMtiBitmap[offset:offset +3])
                     if self.DEBUG:
-                        print ('Size of the message in LLL = %s' %valueSize)
+                        print ('Size of the message in LLL = %s' % valueSize)
                         
                     if valueSize > self.getBitLimit(cont):
                         raise ValueToLarge("This bit is larger than the especification!")
                     self.BITMAP_VALUES[cont] = strWithoutMtiBitmap[offset:offset+3]  + strWithoutMtiBitmap[offset+3:offset+3+valueSize]
                     
                     if self.DEBUG:
-                        print ('\tSetting bit %s value %s' % (cont,self.BITMAP_VALUES[cont]))
+                        print ('\tSetting bit %s value %s' % (cont, self.BITMAP_VALUES[cont]))
                     
                     offset += valueSize + 3    
                         
@@ -1198,11 +1220,11 @@ class ISO8583(object):
             print ('Pack size: %s' % (len(asciiIso)))
         
         if bigEndian:
-            netIso = struct.pack('!h',len(asciiIso))
+            netIso = struct.pack('!h', len(asciiIso))
             if self.DEBUG:
                 print ('Pack Big-endian')
         else:
-            netIso = struct.pack('<h',len(asciiIso))
+            netIso = struct.pack('<h', len(asciiIso))
             if self.DEBUG:
                 print ('Pack Little-endian')
 
@@ -1252,16 +1274,16 @@ class ISO8583(object):
         
         size = iso[0:2]
         if bigEndian:
-            size = struct.unpack('!h',size)
+            size = struct.unpack('!h', size)
             if self.DEBUG:
                 print ('Unpack Big-endian')
         else:
-            size = struct.unpack('<h',size)
+            size = struct.unpack('<h', size)
             if self.DEBUG:
                 print ('Unpack Little-endian')
         
         if len(iso) != (size[0] + 2):
-            raise InvalidIso8583('This is not a valid iso!!The ISO8583 ASCII(%s) is less than the size %s!' % (len(iso[2:]),size[0]))
+            raise InvalidIso8583('This is not a valid iso!!The ISO8583 ASCII(%s) is less than the size %s!' % (len(iso[2:]), size[0]))
             
         self.setIsoContent(iso[2:])    
     
@@ -1289,11 +1311,11 @@ class ISO8583(object):
         asciiIso = tpdu + self.getRawIso()
 
         if bigEndian:
-                netIso = struct.pack('!h',len(asciiIso))
+                netIso = struct.pack('!h', len(asciiIso))
                 if self.DEBUG:
                         print ('Pack Big-endian')
         else:
-                netIso = struct.pack('<h',len(asciiIso))
+                netIso = struct.pack('<h', len(asciiIso))
                 if self.DEBUG:
                         print ('Pack Little-endian')
 
