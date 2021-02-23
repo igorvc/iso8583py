@@ -3,12 +3,12 @@
 from distutils.core import setup
 
 setup(name='ISO8583-Module',
-		version='1.3',
+		version='2.0.1',
 		description='ISO8583 LIBRARY',
 		author='Igor V. Custodio',
 		author_email='igorvc@vulcanno.com.br',
 		url='http://www.vulcanno.com.br/python',
-		download_url='http://code.google.com/p/iso8583py/downloads/list',
+		download_url='https://github.com/igorvc/iso8583py',
 		packages=['ISO8583'],
 		classifiers=[
 		'Development Status :: 5 - Production/Stable',
@@ -68,7 +68,15 @@ setup(name='ISO8583-Module',
 		'Programming Language :: Python :: 3',
 		'Programming Language :: Python :: 3.0',
 		'Programming Language :: Python :: 3.1',
-		'Programming Language :: Python :: 3.2'
+		'Programming Language :: Python :: 3.10',
+		'Programming Language :: Python :: 3.2',
+		'Programming Language :: Python :: 3.3',
+		'Programming Language :: Python :: 3.4',
+		'Programming Language :: Python :: 3.5',
+		'Programming Language :: Python :: 3.6',
+		'Programming Language :: Python :: 3.7',
+		'Programming Language :: Python :: 3.8',
+		'Programming Language :: Python :: 3.9'
 		
       ]
      )
