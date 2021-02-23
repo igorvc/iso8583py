@@ -781,8 +781,8 @@ class ISO8583(object):
     def __setBitTypeXN(self, bit, value):
         """Method that set a bit with value in form XN
         It complete the size of the bit with a default value
-        Example: pack.setBit(3, 'D30000') -> Bit 3 is a N type, so this bit, in ASCII form need to has size = 6 (ISO especification) so the value 30000 size = 5 need to receive more "1" number.
-            In this case, will be "0" in the left. In the package, the bit will be sent like '030000'
+        Example: pack.setBit(30, 'D30000') -> Bit 30 is a N type, so this bit, in ASCII form need to has size = 9 (Postilium especification) so the value D30000 size = 6 need to receive more "3" number.
+            In this case, will be "0" in the right. In the package, the bit will be sent like 'D30000000'
         @param: bit -> bit to be setted
         @param: value -> value to be setted
         @raise: ValueToLarge Exception
@@ -795,7 +795,7 @@ class ISO8583(object):
             value = value[0:self.getBitLimit(bit)]
             raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )
                 
-        self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
+        self.BITMAP_VALUES[bit] = value.ljust(self.getBitLimit(bit),'0')
         
     ################################################################################################
     
