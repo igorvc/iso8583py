@@ -27,7 +27,7 @@ from ISOErrors import *
 import struct
 
 
-class ISO8583:
+class ISO8583(object):
     """Main Class to work with ISO8583 packages.
     Used to create, change, send, receive, parse or work with ISO8593 Package version 1993.
     It's 100% Python :)
@@ -81,16 +81,21 @@ class ISO8583:
 			_BIT_POSITION_6, _BIT_POSITION_7
 			]
     _BIT_DEFAULT_VALUE = 0
+
+    # now we will use a best way to detect invalid bit type
+    _BITS_VALID_TYPES = [
+            'b', 'a', 'n', 'an', 'ans', 'll', 'lll', 'xn'
+        ]
     
     #ISO8583 contants
     _BITS_VALUE_TYPE = {}
     # Every _BITS_VALUE_TYPE has:
-    # _BITS_VALUE_TYPE[N] = [ X,Y, Z, W,K]
+    # _BITS_VALUE_TYPE[N] = [ X, Y, Z, W, K]
     # N = bitnumber
     # X = smallStr representation of the bit meanning
     # Y = large str representation
-    # Z = type of the bit (B, N, A, AN, ANS, LL, LLL)
-    #W = size of the information that N need to has
+    # Z = type of the bit (B, N, A, AN, ANS, LL, LLL, XN)
+    # W = size of the information that N need to has
     # K = type os values a, an, n, ansb, b
     _BITS_VALUE_TYPE[1] = ['BME', 'Bit Map Extended', 'B', 16, 'b']
     _BITS_VALUE_TYPE[2] = ['2', 'Primary account number (PAN)', 'LL', 19, 'n']
@@ -358,6 +363,32 @@ class ISO8583:
         else:
             for cont in range(0,129):
                 self.BITMAP_VALUES.append(self._BIT_DEFAULT_VALUE)
+    ################################################################################################     
+
+    ################################################################################################
+    # validate bit Type using _BITS_VALID_TYPES array
+    def __validateBitType(self, type):
+        """Method that validate the bit type using a _BITS_VALID_TYPES array
+        It's a internal method, so don't call!
+        @param: type -> type to check
+        @return: True/False , if type is valid, return True
+        """
+        if self.DEBUG:
+            print ('Validating bit type = %s' % type )
+            
+        try:
+            tmp = self._BITS_VALID_TYPES.index(type.upper())
+            if self.DEBUG:
+                print ('%s is a Valid Type! (%s)' % (type, tmp) )
+            return True
+        except ValueError:
+            return False
+
+        return False
+
+
+
+
     ################################################################################################        
     
     ################################################################################################
@@ -378,7 +409,7 @@ class ISO8583:
             raise BitInexistent("Bit number %s dosen't exist!" % bit)
             
         # caculate the position insede bitmap
-        pos =1
+        pos = 1
         
         if self.getBitType(bit) == 'LL':
             self.__setBitTypeLL(bit, value)
@@ -395,8 +426,11 @@ class ISO8583:
         if self.getBitType(bit) == 'ANS' or self.getBitType(bit) == 'B':
             self.__setBitTypeANS(bit, value)        
         
-        if  self.getBitType(bit) == 'B':
-            self.__setBitTypeB(bit, value)    
+        if self.getBitType(bit) == 'B':
+            self.__setBitTypeB(bit, value)
+
+        if self.getBitType(bit) == 'XN':
+            self.__setBitTypeXN(bit, value)    
 
             
         
@@ -407,11 +441,11 @@ class ISO8583:
         if (bit % 8) == 0:
             pos = (bit / 8) - 1
         else:
-            pos = (bit /8) 
+            pos = (bit / 8) 
 
         #need to check if the value can be there .. AN , N ... etc ... and the size
         
-        self.BITMAP[pos] = self.BITMAP[pos] | self._TMP[ (bit%8) +1]
+        self.BITMAP[pos] = self.BITMAP[pos] | self._TMP[ (bit % 8) + 1]
         
                 
         return True
@@ -592,9 +626,9 @@ class ISO8583:
     
         if len(value) > 99:
             #value = value[0:99]
-            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
+            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )
         if len(value) > self.getBitLimit(bit):
-            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )    
+            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )    
             
         size ="%s"% len(value)    
     
@@ -618,9 +652,9 @@ class ISO8583:
         value = "%s" % value
     
         if len(value) > 999:
-            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
+            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )
         if len(value) > self.getBitLimit(bit):
-            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )    
+            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )    
             
         size ="%s"% len(value)    
                 
@@ -645,7 +679,7 @@ class ISO8583:
     
         if len(value) > self.getBitLimit(bit):
             value = value[0:self.getBitLimit(bit)]
-            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
+            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )
                 
         self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
         
@@ -668,7 +702,7 @@ class ISO8583:
     
         if len(value) > self.getBitLimit(bit):
             value = value[0:self.getBitLimit(bit)]
-            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
+            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )
                 
         self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
         
@@ -691,7 +725,7 @@ class ISO8583:
     
         if len(value) > self.getBitLimit(bit):
             value = value[0:self.getBitLimit(bit)]
-            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
+            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )
                 
         self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
         
@@ -714,7 +748,30 @@ class ISO8583:
     
         if len(value) > self.getBitLimit(bit):
             value = value[0:self.getBitLimit(bit)]
-            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit,self.getBitType(bit),self.getBitLimit(bit)) )
+            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )
+                
+        self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
+        
+    ################################################################################################
+
+    ################################################################################################
+    # Set of type XN, 
+    def __setBitTypeXN(self, bit, value):
+        """Method that set a bit with value in form XN
+        It complete the size of the bit with a default value
+        Example: pack.setBit(3, 'D30000') -> Bit 3 is a N type, so this bit, in ASCII form need to has size = 6 (ISO especification) so the value 30000 size = 5 need to receive more "1" number.
+            In this case, will be "0" in the left. In the package, the bit will be sent like '030000'
+        @param: bit -> bit to be setted
+        @param: value -> value to be setted
+        @raise: ValueToLarge Exception
+        It's a internal method, so don't call!
+        """
+        
+        value = "%s" % value
+    
+        if len(value) > self.getBitLimit(bit):
+            value = value[0:self.getBitLimit(bit)]
+            raise ValueToLarge('Error: value up to size! Bit[%s] of type %s limit size = %s' % (bit, self.getBitType(bit), self.getBitLimit(bit)) )
                 
         self.BITMAP_VALUES[bit] = value.zfill(self.getBitLimit(bit))
         
@@ -738,7 +795,7 @@ class ISO8583:
         
         for cont in range(0,129):
             if self.BITMAP_VALUES[cont] != self._BIT_DEFAULT_VALUE:
-                print("Bit[%s] of type %s has limit %s = %s"%(cont,self.getBitType(cont),self.getBitLimit(cont), self.BITMAP_VALUES[cont]) )
+                print("Bit[%s] of type %s has limit %s = %s"%(cont, self.getBitType(cont), self.getBitLimit(cont), self.BITMAP_VALUES[cont]) )
                 
                 
     ################################################################################################
@@ -815,7 +872,7 @@ class ISO8583:
         @param: smallStr -> a small String representantion of the bit, used to build "user friendly prints", example "2" for bit 2
         @param: largeStr -> a large String representantion of the bit, used to build "user friendly prints" and to be used to inform the "main use of the bit", 
             example "Primary account number (PAN)" for bit 2
-        @param: bitType -> type the bit, used to build the values, example "LL" for bit 2. Need to be one of (B, N, AN, ANS, LL, LLL)    
+        @param: bitType -> type the bit, used to build the values, example "LL" for bit 2. Need to be one of (B, N, AN, ANS, LL, LLL, XN)    
         @param: size -> limit size the bit, used to build/complete the values, example "19" for bit 2.     
         @param: valueType -> value type the bit, used to "validate" the values, example "n" for bit 2. This mean that in bit 2 we need to have only numeric values.
             Need to be one of (a, an, n, ansb, b)
@@ -832,6 +889,7 @@ class ISO8583:
         
         #need to validate if the type and size is compatible! example slimit = 100 and type = LL
             
+        #refactoring to use validate method...
         if     bitType == "B" or bitType == "N" or bitType == "AN" or bitType == "ANS" or bitType == "LL" or bitType == "LLL":
             if     valueType == "a" or valueType == "n" or valueType == "ansb" or valueType == "ans" or valueType == "b" or valueType == "an" :
                 self._BITS_VALUE_TYPE[bit] = [smallStr, largeStr, bitType, size, valueType]
