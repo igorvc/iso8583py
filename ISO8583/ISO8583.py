@@ -88,7 +88,7 @@ class ISO8583(object):
         ]
     # now we will use a best way to detect invalid bit type
     _BITS_VALID_VALUE_TYPES = [
-            'a', 'n', 'an', 'ansb', 'b'
+            'a', 'n', 'an', 'ansb', 'b', 'ans'
         ]
     
     #ISO8583 contants
@@ -381,7 +381,7 @@ class ISO8583(object):
             print ('Validating bit type = %s' % type )
             
         try:
-            tmp = self._BITS_VALID_TYPES.index(type.upper())
+            tmp = self._BITS_VALID_TYPES.index(type.lower())
             if self.DEBUG:
                 print ('%s is a Valid Type! (%s)' % (type, tmp) )
             return True
@@ -392,9 +392,9 @@ class ISO8583(object):
     ################################################################################################  
 
         ################################################################################################
-    # validate bit Type using _BITS_VALID_TYPES array
+    # validate bit Type using _BITS_VALID_VALUE_TYPES array
     def __validateValueType(self, value):
-        """Method that validate the bit type using a _BITS_VALID_TYPES array
+        """Method that validate the bit type using a _BITS_VALID_VALUE_TYPES array
         It's a internal method, so don't call!
         @param: type -> type to check
         @return: True/False , if type is valid, return True
@@ -403,7 +403,7 @@ class ISO8583(object):
             print ('Validating bit value = %s' % value )
             
         try:
-            tmp = self._BITS_VALID_VALUE_TYPES.index(value.upper())
+            tmp = self._BITS_VALID_VALUE_TYPES.index(value.lower())
             if self.DEBUG:
                 print ('%s is a Valid Value! (%s)' % (value, tmp) )
             return True

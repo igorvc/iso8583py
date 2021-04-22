@@ -38,6 +38,7 @@ class ISO8583Postilion(ISO8583):
 
     Example:
         from ISO8583 import *
+        from ISO8583.ISO8583Postilion import ISO8583Postilion
         from ISO8583.ISOErrors import *
         
         iso = ISO8583Postilion()
@@ -59,40 +60,12 @@ class ISO8583Postilion(ISO8583):
         
         print ('The Bitmap is = %s' %iso.getBitmap()) 
         iso.showIsoBits();
-        print ('This is the ISO8583 complete package %s' % iso.getRawIso())
-        print ('This is the ISO8583 complete package to sent over the TCPIP network %s' % iso.getNetworkISO())
+        print ('This is the ISO8583Postilion complete package %s' % iso.getRawIso())
+        print ('This is the ISO8583Postilion complete package to sent over the TCPIP network %s' % iso.getNetworkISO())
     
 """
        
     ################################################################################################
-    #Default constructor of the ISO8583Postilion Object
-    def __init__(self, iso="", debug=False):
-        """Default Constructor of ISO8583Postilion Package.
-        It inicialize a "brand new" ISO8583Postilion package
-        Example: To Enable debug you can use:
-            pack = ISO8583Postilion(debug=True)
-        @param: iso a String that represents the ASCII of the package. The same that you need to pass to setIsoContent() method.
-        @param: debug (True or False) default False -> Used to print some debug infos. Only use if want that messages! 
-        """
-        #Bitmap internal representation
-        self.BITMAP = []
-        #Values
-        self.BITMAP_VALUES = []
-        #Bitmap ASCII representantion
-        self.BITMAP_HEX = ''
-        # MTI
-        self.MESSAGE_TYPE_INDICATION = '';
-        #Debug ?
-        self.DEBUG = debug
-        
-        self.__inicializeBitmap()
-        self.__inicializeBitmapValues()
-        
-        if iso != "":
-            self.setIsoContent(iso)
 
-        #redefining bits to Postilion specification
-        
-    ################################################################################################
-    
+   
     
